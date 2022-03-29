@@ -177,9 +177,17 @@ func sendReleasesBatch(releases []Release, token string, dryRun bool) error {
 	}
 	req.Header.Add("X-API-Key", token)
 	req.Header.Add("Content-Type", "application/json")
-	response, err := http.DefaultClient.Do(req)
-	if response.Status != "200" {
-		return fmt.Errorf("server returned %s", response.Status)
+	res, err := http.DefaultClient.Do(req)
+	if err == nil {
+		defer res.Body.Close()
+		_, err = ioutil.ReadAll(res.Body)
+	} else {
+		log.Error().Msgf("error sending Athenian API request: %v", err)
+		return err
+	}
+	if res.StatusCode != 200 {
+		log.Error().Msgf("Athenian API returned %s", res.Status)
+		return fmt.Errorf("server returned %s", res.Status)
 	}
 	return err
 }
