@@ -33,12 +33,19 @@ func parseArgs() ([]string, time.Time, bool, string, string) {
 		"Load pipelines started after this date.")
 	dryRun := flag.Bool("dry-run", false, "Print release notifications instead of sending")
 	flag.Parse()
+	repos := flag.Args()
+	for _, repo := range repos {
+		if strings.HasPrefix(repo, "-") {
+			log.Error().Msgf("\"%v\" is not a repository name, flags must go first", repo)
+			return nil, time.Time{}, false, "", ""
+		}
+	}
 	since, err := time.Parse("2006-01-02", sinceStr)
 	if err != nil {
 		log.Error().Msgf("Invalid date: %v (must be YYYY-MM-DD)", sinceStr)
 		return nil, time.Time{}, false, "", ""
 	}
-	return flag.Args(), since, *dryRun, circleToken, athenianToken
+	return repos, since, *dryRun, circleToken, athenianToken
 }
 
 func makeCircleAPIRequest(endpoint, token string) ([]byte, int) {
@@ -178,15 +185,16 @@ func sendReleasesBatch(releases []Release, token string, dryRun bool) error {
 	req.Header.Add("X-API-Key", token)
 	req.Header.Add("Content-Type", "application/json")
 	res, err := http.DefaultClient.Do(req)
+	var feedback []byte
 	if err == nil {
 		defer res.Body.Close()
-		_, err = ioutil.ReadAll(res.Body)
+		feedback, err = ioutil.ReadAll(res.Body)
 	} else {
 		log.Error().Msgf("error sending Athenian API request: %v", err)
 		return err
 	}
 	if res.StatusCode != 200 {
-		log.Error().Msgf("Athenian API returned %s", res.Status)
+		log.Error().Msgf("Athenian API returned %s:\n%s", res.Status, string(feedback))
 		return fmt.Errorf("server returned %s", res.Status)
 	}
 	return err
