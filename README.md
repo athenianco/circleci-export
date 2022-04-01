@@ -5,7 +5,7 @@ Load pipelines from CircleCI and submit them to Athenian as releases.
 ## Installation
 
 ```
-GOBIN=$(pwd) go install github.com/athenianco/circleci-labeler@latest
+GOBIN=$(pwd) go install github.com/athenianco/circleci-export@latest
 ```
 
 ## Usage
