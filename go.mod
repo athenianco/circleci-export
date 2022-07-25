@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/rs/zerolog v1.26.1
-	github.com/schollz/progressbar/v3 v3.8.6
+	github.com/schollz/progressbar/v3 v3.8.7
 )
 
 require (
