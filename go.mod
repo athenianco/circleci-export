@@ -11,7 +11,13 @@ require (
 	github.com/mattn/go-runewidth v0.0.13 // indirect
 	github.com/mitchellh/colorstring v0.0.0-20190213212951-d06e56a500db // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
-	golang.org/x/crypto v0.0.0-20220131195533-30dcbda58838 // indirect
-	golang.org/x/sys v0.0.0-20220128215802-99c3d69c2c27 // indirect
-	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211 // indirect
+	golang.org/x/crypto v0.0.0-20220926161630-eccd6366d1be // indirect
+	golang.org/x/sys v0.0.0-20220927170352-d9d178bc13c6 // indirect
+	golang.org/x/term v0.0.0-20220919170432-7a66f970e087 // indirect
+)
+
+replace (
+	golang.org/x/crypto => golang.org/x/crypto v0.0.0-20220926161630-eccd6366d1be
+	golang.org/x/net => golang.org/x/net v0.0.0-20220927171203-f486391704dc
+	golang.org/x/text => golang.org/x/text v0.3.7
 )
