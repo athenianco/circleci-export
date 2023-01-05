@@ -19,5 +19,5 @@ require (
 replace (
 	golang.org/x/crypto => golang.org/x/crypto v0.0.0-20220926161630-eccd6366d1be
 	golang.org/x/net => golang.org/x/net v0.0.0-20220927171203-f486391704dc
-	golang.org/x/text => golang.org/x/text v0.3.8
+	golang.org/x/text => golang.org/x/text v0.4.0
 )
