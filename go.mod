@@ -12,12 +12,13 @@ require (
 	github.com/mitchellh/colorstring v0.0.0-20190213212951-d06e56a500db // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	golang.org/x/crypto v0.0.0-20220926161630-eccd6366d1be // indirect
-	golang.org/x/sys v0.3.0 // indirect
-	golang.org/x/term v0.3.0 // indirect
+	golang.org/x/sys v0.5.0 // indirect
+	golang.org/x/term v0.5.0 // indirect
 )
 
 replace (
 	golang.org/x/crypto => golang.org/x/crypto v0.0.0-20220926161630-eccd6366d1be
-	golang.org/x/net => golang.org/x/net v0.4.0
+	golang.org/x/net => golang.org/x/net v0.7.0
+	golang.org/x/sys => golang.org/x/sys v0.1.0
 	golang.org/x/text => golang.org/x/text v0.4.0
 )
